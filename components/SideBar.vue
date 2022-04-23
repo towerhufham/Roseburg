@@ -1,0 +1,14 @@
+<script lang="ts">
+export default {
+  data() {
+    return {
+    }
+  },
+}
+</script>
+
+<template>
+  <div class="bg-gradient-to-b from-green-600 to-green-800 h-screen w-2/12">
+
+  </div>
+</template>
