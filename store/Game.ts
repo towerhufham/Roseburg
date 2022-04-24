@@ -1,18 +1,30 @@
 import { defineStore } from "pinia";
 
+export enum Resource {
+    Wood = "Wood",
+    Grain = "Grain"
+}
+
+export interface ResourceChange {
+    resource: Resource,
+    change: number
+}
+
+export interface ActionSquare {
+    name: string,
+    changes: ResourceChange[]
+} 
+
 export const useStore = defineStore("main", {
-    state: () => {
+    state: (): Record<Resource, number> => {
         return {
-            wood: 0,
-            grain: 0,
+            Wood: 0,
+            Grain: 0
         }
     },
     actions: {
-        changeWood(n: number) {
-            this.wood += n;
-        },
-        changeGrain(n: number) {
-            this.grain += n;
+        changeResource(resource: Resource, n: number) {
+            this[resource] += n;
         }
     }
 })
