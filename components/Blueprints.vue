@@ -1,11 +1,11 @@
 <script lang="ts">
-import { useStore, ResourceCost, ResourceGain, getEmoji } from "@/store/Game"
+import { useStore, ResourceCost, ResourceGain, getEmoji, ActionSpace } from "@/store/Game"
 
 export default {
   setup() {
     const store = useStore()
 
-  function formatResourceCost(rc: ResourceCost): string {
+    function formatResourceCost(rc: ResourceCost): string {
         return `-${rc.cost}${getEmoji(rc.resource)}`
     }
 
@@ -13,14 +13,33 @@ export default {
         return `+${rg.gain}${getEmoji(rg.resource)}`
     }
 
-    return { store, formatResourceGain, formatResourceCost }
+    let isBuilding = false;
+
+    function toggleIsBuilding() {
+      isBuilding = !isBuilding
+    }
+
+    function buildingButtontext() {
+      return isBuilding ? "Building..." : "Build🔨"
+    }
+
+    function handleBuild(as: ActionSpace) {
+      if (isBuilding) {
+        store.buildAction(as);
+      }
+    }
+
+    return { store, formatResourceGain, formatResourceCost, buildingButtontext, toggleIsBuilding, handleBuild }
   },
 }
 </script>
 
 <template>
   <div class="flex gap-5 p-3 bg-blue-300">
-    <div v-for="action in store.blueprintSpaces" :key="action.name" @click="store.buildAction(action)" class="flex flex-col items-center border-2 border-yellow-500 bg-yellow-100 rounded-lg shadow-md p-1 hover:bg-yellow-50">
+    <button @click="toggleIsBuilding" class="border-2 border-red-500 bg-red-100 rounded-lg shadow-md p-1 hover:bg-red-50 text-3xl">
+      {{ buildingButtontext() }}
+    </button>
+    <div v-for="action in store.blueprintSpaces" :key="action.name" @click="handleBuild(action)" class="flex flex-col items-center border-2 border-yellow-500 bg-yellow-100 rounded-lg shadow-md p-1 hover:bg-yellow-50">
         <h2 class="text-4xl">{{ action.name }}</h2>
         <hr class="w-40 m-3 border-yellow-500" />
         <div>

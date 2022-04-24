@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
 
 export enum Resource {
+    Builds = "Builds",
     Wood = "Wood",
     Grain = "Grain"
 }
 
 export function getEmoji(resource: Resource): string {
     const table: Record<Resource, string> = {
+        Builds: "🔨",
         Wood: "🪵",
         Grain: "🌾"
     }
@@ -40,11 +42,22 @@ export const useStore = defineStore("main", {
     state: (): GameState => {
         return {
             inventory: {
+                Builds: 0,
                 Wood: 0,
                 Grain: 0
             },
             actionsTaken: 0,
             builtSpaces: [
+                {
+                    name: "Build", 
+                    cost: [
+                        {resource: Resource.Wood, cost: 2}, 
+                        {resource: Resource.Grain, cost: 1}
+                    ], 
+                    gain: [
+                        {resource: Resource.Builds, gain: 1}
+                    ]
+                },
                 {name: "Woodcutting", cost: [], gain: [{resource: Resource.Wood, gain: 2}]},
                 {name: "Planting", cost: [], gain: [{resource: Resource.Grain, gain: 1}]}
             ],
