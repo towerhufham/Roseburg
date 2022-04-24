@@ -1,5 +1,5 @@
 <template>
-  <div class="max-h-screen h-screen overflow-hidden bg-gradient-to-b from-green-100 to-green-200">
+  <div class="flex flex-col max-h-screen h-screen bg-gradient-to-b from-green-100 to-green-200">
     <NavBar/>
     <div class="flex">
       <SideBar/>

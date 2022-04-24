@@ -13,14 +13,20 @@ export function getEmoji(resource: Resource): string {
     return table[resource];
 }
 
-export interface ResourceChange {
+export interface ResourceCost {
     resource: Resource,
-    change: number
+    cost: number
+}
+
+export interface ResourceGain {
+    resource: Resource,
+    gain: number
 }
 
 export interface ActionSquare {
     name: string,
-    changes: ResourceChange[]
+    cost: ResourceCost[],
+    gain: ResourceGain[]
 } 
 
 export const useStore = defineStore("main", {
@@ -35,8 +41,12 @@ export const useStore = defineStore("main", {
             this[resource] += n;
         },
         takeAction(as: ActionSquare) {
-            for (const c of as.changes) {
-                this.changeResource(c.resource, c.change);
+            //todo: handle if it cant be afforded
+            for (const c of as.cost) {
+                this.changeResource(c.resource, -c.cost);
+            }
+            for (const g of as.gain) {
+                this.changeResource(g.resource, g.gain);
             }
         }
     }
