@@ -9,6 +9,7 @@
         </div>
         <div class="w-full">
           <ActionSpaces/>
+          <Blueprints/>
         </div>
       </div>
     </div>
