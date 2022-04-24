@@ -6,6 +6,9 @@
       <div class="w-full">
         <Inventory/>
       </div>
+      <div class="w-full">
+        <ActionSpaces/>
+      </div>
     </div>
   </div>
 </template>
