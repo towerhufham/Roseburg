@@ -3,11 +3,13 @@
     <NavBar/>
     <div class="flex">
       <SideBar/>
-      <div class="w-full">
-        <Inventory/>
-      </div>
-      <div class="w-full">
-        <ActionSpaces/>
+      <div class="flex flex-col w-full">
+        <div class="w-full">
+          <Inventory/>
+        </div>
+        <div class="w-full">
+          <ActionSpaces/>
+        </div>
       </div>
     </div>
   </div>
