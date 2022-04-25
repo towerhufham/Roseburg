@@ -1,28 +1,29 @@
 <script lang="ts">
 import { useStore, ActionSpace } from "@/store/Game"
+import { reactive } from "@vue/composition-api"
 
 export default {
   setup() {
     const store = useStore()
-
-    let isBuilding = false;
+    const state = reactive({isBuilding: false});
 
     function toggleIsBuilding() {
-      isBuilding = !isBuilding
+      state.isBuilding = !state.isBuilding
     }
 
     function buildingButtontext() {
-      return isBuilding ? "Building..." : "Build🔨"
+      return state.isBuilding ? "Building..." : "Build🔨"
     }
 
     function handleBuild(as: ActionSpace) {
-      if (isBuilding) {
+      if (state.isBuilding) {
         store.buildAction(as);
+        state.isBuilding = false;
       }
     }
 
     return { store, buildingButtontext, toggleIsBuilding, handleBuild }
-  },
+  }
 }
 </script>
 
