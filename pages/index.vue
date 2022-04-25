@@ -8,7 +8,7 @@
           <Inventory/>
         </div>
         <div class="w-full">
-          <ActionSpaces/>
+          <BuiltSpaces/>
           <Blueprints/>
         </div>
       </div>
