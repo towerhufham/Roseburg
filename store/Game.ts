@@ -3,14 +3,16 @@ import { defineStore } from "pinia";
 export enum Resource {
     Builds = "Builds",
     Wood = "Wood",
-    Grain = "Grain"
+    Grain = "Grain",
+    Stone = "Stone"
 }
 
 export function getEmoji(resource: Resource): string {
     const table: Record<Resource, string> = {
         Builds: "🔨",
         Wood: "🪵",
-        Grain: "🌾"
+        Grain: "🌾",
+        Stone: "🪨"
     }
     return table[resource];
 }
@@ -44,7 +46,8 @@ export const useStore = defineStore("main", {
             inventory: {
                 Builds: 0,
                 Wood: 0,
-                Grain: 0
+                Grain: 0,
+                Stone: 0,
             },
             actionsTaken: 0,
             builtSpaces: [
