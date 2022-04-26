@@ -6,7 +6,7 @@ export default {
   setup() {
     const store = useStore()
     const visibleResources = computed(() => {
-      return Object.values(Resource).filter(r => store.inventory[r] > 0 || r === "Builds")
+      return Object.values(Resource).filter(r => store.inventory[r] > 0 || r === "Time")
     })
     return { store, visibleResources, getEmoji }
   },

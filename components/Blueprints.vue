@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex gap-5 p-3 bg-blue-300">
+  <div class="items-start flex flex-wrap gap-5 p-3 bg-blue-300">
     <button @click="tryStartBuilding" class="border-2 border-red-500 bg-red-100 rounded-lg shadow-md p-1 hover:bg-red-50 text-3xl">
       {{ state.isBuilding ? "Building..." : "Build🔨" }}
     </button>

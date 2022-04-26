@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex gap-5 p-3">
+  <div class="flex-grow items-start flex flex-wrap gap-5 p-3">
     <ActionSpace v-for="action in store.builtSpaces" v-bind:action="action" :key="action.name" @click.native="store.takeAction(action)" />
   </div>
 </template>

@@ -1,16 +1,12 @@
 <template>
   <div class="flex flex-col max-h-screen h-screen bg-gradient-to-b from-green-100 to-green-200">
     <NavBar/>
-    <div class="flex">
+    <div class="flex flex-grow">
       <SideBar/>
-      <div class="flex flex-col w-full">
-        <div class="w-full">
-          <Inventory/>
-        </div>
-        <div class="w-full">
-          <BuiltSpaces/>
-          <Blueprints/>
-        </div>
+      <div class="w-full flex flex-col">
+        <Inventory/>
+        <BuiltSpaces/>
+        <Blueprints/>
       </div>
     </div>
   </div>
