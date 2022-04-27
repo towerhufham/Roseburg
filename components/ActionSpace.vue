@@ -1,5 +1,6 @@
 <script lang="ts">
-import { ResourceCost, ResourceGain, getEmoji, ActionSpace } from "@/store/Game"
+// @ts-nocheck <-- TODO: FIX THE COMPUTED THINGIE THAT WE NEED THIS FOR
+import { ResourceCost, ResourceGain, getEmoji } from "@/store/Game"
 
 export default {
     props: ["action"],
@@ -13,29 +14,37 @@ export default {
         formatRandomGain(rgs: ResourceGain[]): string {
             let str = ""
             for (const rg of rgs) {
-                str += `/+${rg.gain}${getEmoji(rg.resource)}`
+                str += `/${rg.gain >= 0 ? "+" : ""}${rg.gain}${getEmoji(rg.resource)}`
             }
-            return str.substring(2);
+            return str.substring(1);
+        }
+    },
+    computed: {
+        activeClasses() {
+            return {
+                "bg-yellow-100": this.action.active,
+                "bg-slate-300": !this.action.active
+            }
         }
     }
 }
 </script>
 
 <template>
-    <div class="flex flex-col items-center border-2 border-yellow-500 bg-yellow-100 rounded-lg shadow-md p-1 hover:bg-yellow-50">
-      <h2 class="text-4xl">{{ action.name }}</h2>
-      <hr class="w-40 m-3 border-yellow-500" />
+    <div v-bind:class="activeClasses" class="flex flex-col items-center border-2 border-yellow-500 rounded-lg shadow-md p-1 hover:bg-yellow-50">
+      <h2 class="text-xl">{{ action.name }}</h2>
+      <hr class="w-20 m-2 border-yellow-500" />
       <div class="text-center">
-        <span v-for="cost in action.cost" :key="cost.resource" class="text-3xl">
+        <span v-for="cost in action.cost" :key="cost.resource" class="text-xl">
             {{ formatResourceCost(cost) }}
         </span>
-        <span v-if="action.cost.length > 0" class="text-3xl text-yellow-400">
+        <span v-if="action.cost.length > 0" class="text-xl text-yellow-400">
           🠊
         </span>
-        <span v-for="gain in action.gain" :key="gain.resource" class="text-3xl">
+        <span v-for="gain in action.gain" :key="gain.resource" class="text-xl">
             {{ formatResourceGain(gain) }}
         </span>
-        <span v-if="action.randomGain" class="text-3xl">
+        <span v-if="action.randomGain" class="text-xl">
             {{ formatRandomGain(action.randomGain) }}
         </span>
       </div>

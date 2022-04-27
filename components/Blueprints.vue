@@ -34,7 +34,7 @@ export default {
 
 <template>
   <div class="items-start flex flex-wrap gap-5 p-3 bg-blue-300">
-    <button @click="tryStartBuilding" class="border-2 border-red-500 bg-red-100 rounded-lg shadow-md p-1 hover:bg-red-50 text-3xl">
+    <button @click="tryStartBuilding" class="border-2 border-green-400 bg-green-50 rounded-lg shadow-md p-1 hover:bg-white text-xl">
       {{ state.isBuilding ? "Building..." : "Build🔨" }}
     </button>
     <ActionSpace v-for="action in store.blueprintSpaces" v-bind:action="action" :key="action.name" @click.native="handleBuild(action)" />
