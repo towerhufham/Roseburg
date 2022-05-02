@@ -38,13 +38,21 @@ export interface ResourceGain {
     gain: number
 }
 
-export interface ActionSpace {
-    name: string,
-    active: boolean
-    cost: ResourceCost[],
-    gain: ResourceGain[],
-    randomGain?: ResourceGain[]
-} 
+export class ActionSpace {
+    name: string;
+    active: boolean;
+    cost: ResourceCost[];
+    gain: ResourceGain[];
+    randomGain?: ResourceGain[];
+
+    constructor(name: string, cost: ResourceCost[], gain: ResourceGain[], randomGain?: ResourceGain[]) {
+        this.name = name;
+        this.active = true;
+        this.cost = cost;
+        this.gain = gain;
+        this.randomGain = []
+    }
+}
 
 export interface GameState {
     inventory: Record<Resource, number>,
@@ -70,19 +78,30 @@ export const useStore = defineStore("main", {
             },
             actionsTaken: [],
             builtSpaces: [
-                {
-                    name: "Building", 
-                    active: true,
-                    cost: [
+                new ActionSpace(
+                    "Building", 
+                    [
                         {resource: Resource.Wood, cost: 2}, 
                         {resource: Resource.Grain, cost: 1}
                     ], 
-                    gain: [
+                    [
                         {resource: Resource.Builds, gain: 1}
                     ]
-                },
-                {name: "Woodcutting", active: true, cost: [], gain: [{resource: Resource.Wood, gain: 3}]},
-                {name: "Planting", active: true, cost: [], gain: [{resource: Resource.Grain, gain: 2}]}
+                ),
+                new ActionSpace(
+                    "Woodcutting", 
+                    [], 
+                    [
+                        {resource: Resource.Wood, gain: 2}
+                    ]
+                ),
+                new ActionSpace(
+                    "Planting", 
+                    [], 
+                    [
+                        {resource: Resource.Grain, gain: 1}
+                    ]
+                ),
             ],
             blueprintSpaces: [
                 {
